@@ -88,9 +88,9 @@ foreach ($etherpadlites as $etherpadlite) {
     $link = $OUTPUT->render_from_template('mod_etherpadlite/instance_link', $linkdata);
 
     if ($course->format == 'weeks' || $course->format == 'topics') {
-        $table->data[] = [$etherpadlite->section, $link, format_text($etherpadlite->intro, FORMAT_MOODLE, 'para = false')];
+        $table->data[] = [$etherpadlite->section, $link, format_text($etherpadlite->intro, FORMAT_MOODLE, ['para' => 'false'])];
     } else {
-        $table->data[] = [$link, format_text($etherpadlite->intro, FORMAT_MOODLE, 'para = false')];
+        $table->data[] = [$link, format_text($etherpadlite->intro, FORMAT_MOODLE, ['para' => 'false'])];
     }
 }
 

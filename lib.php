@@ -283,6 +283,8 @@ function etherpadlite_uninstall() {
  */
 function etherpadlite_supports($feature) {
     switch ($feature) {
+        case FEATURE_CAN_DISPLAY:
+            return true;
         case FEATURE_GROUPS:
             return true;
         case FEATURE_GROUPINGS:
