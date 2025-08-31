@@ -27,7 +27,16 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig && $ADMIN->fulltree) {
+    $mycfg = get_config('etherpadlite');
+
+    // Connection and Credential Test Tool.
     /** @var \admin_settingpage $settings */
+    $settings->add(new \admin_setting_description(
+        'etherpadlite/connectiontest',
+        '',
+        $OUTPUT->render(new \mod_etherpadlite\output\component\test_tool_button($mycfg))
+    ));
+
     $settings->add(new admin_setting_configtext('etherpadlite/url', get_string('url', 'etherpadlite'),
         get_string('urldesc', 'etherpadlite'), '', PARAM_URL, 40));
 
@@ -36,25 +45,6 @@ if ($hassiteconfig && $ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configtext('etherpadlite/apikey', get_string('apikey', 'etherpadlite'),
         get_string('apikeydesc', 'etherpadlite'), 'Enter your API Key', PARAM_RAW, 40));
-
-    // Connection and Credential Test Tool.
-    $attributes = [
-        'class' => 'btn btn-secondary disabled',
-        'disabled' => 'disabled',
-        'data-action' => 'mod-etherpadlite-test-tool',
-        'title' => get_string('testtooldisabledbuttontitle', 'etherpadlite'),
-    ];
-    $connectiontoolbutton = \html_writer::tag(
-        'button',
-        get_string('testtoolbutton', 'etherpadlite'),
-        $attributes
-    );
-    $settings->add(new \admin_setting_description(
-        'etherpadlite/testtool',
-        get_string('testtoolheader', 'etherpadlite'),
-        get_string('testtoolheaderdesc', 'etherpadlite', $connectiontoolbutton)
-    ));
-    $PAGE->requires->js_call_amd('mod_etherpadlite/test_tool', 'init');
 
     $settings->add(new admin_setting_configselect('etherpadlite/apiversion', get_string('apiversion', 'etherpadlite'),
         get_string('apiversiondesc', 'etherpadlite'), '1.2', ['1.1' => '1.1', '1.2' => '1.2']));
